@@ -1,17 +1,23 @@
 import { useReducer } from 'react';
 
-const ExpenseItem = () => {
+const useReduFn = () => {
   const initialState = [{ id: 'a', text: 'Learn Javascript', complete: false }, { id: 'b', text: 'Learn Node', complete: false }, { id: 'c', text: 'Learn', complete: false }]
 
   const reducer = (state, action) => {
-    const item = state.filter(z => z.id === action)
-    const list = state.filter(z => z.id !== action)
+    const itemId = state.filter(z => z.id === action)
+    const itemsWithOutId = state.filter(z => z.id !== action)
 
-    switch (item[0].complete) { // 
+    let elementInMainState=initialState.filter(z => z.id === action)
+    let indexOfElementInMainState=initialState.indexOf(elementInMainState[0])
+    switch (itemId[0].complete) {
       case false:
-        return [...list, { ...item[0], complete: true }]
+        let updatedElement1 = { ...itemId[0], complete: true }
+        itemsWithOutId.splice(indexOfElementInMainState, 0, updatedElement1)
+        return itemsWithOutId
       case true:
-        return [...list, { ...item[0], complete: false }]
+        let updatedElement2 = { ...itemId[0], complete: false }
+        itemsWithOutId.splice(indexOfElementInMainState, 0, updatedElement2)
+        return itemsWithOutId
       default:
         return state;
     }
@@ -31,4 +37,4 @@ const ExpenseItem = () => {
   )
 }
 
-export default ExpenseItem;
+export default useReduFn;
