@@ -9,6 +9,7 @@ const useReduFn = () => {
 
     let elementInMainState=initialState.filter(z => z.id === action)
     let indexOfElementInMainState=initialState.indexOf(elementInMainState[0])
+    
     switch (itemId[0].complete) {
       case false:
         let updatedElement1 = { ...itemId[0], complete: true }
